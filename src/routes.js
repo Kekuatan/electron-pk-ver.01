@@ -37,6 +37,7 @@ export const SetUser = (url, data) => {
     if (blank(data)) {
         return routes[url]['user']
     } else {
+        console.log(data)
         let user = { }
         user['auth'] = !blank(data['auth']) ? data['auth'] : false;
         user['access_token'] = !blank(data['access_token']) ? data['access_token'] : false;

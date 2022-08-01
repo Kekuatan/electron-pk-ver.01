@@ -8,7 +8,7 @@ const cameraOut = process.env.CAMERA_OUT;
      'Authorization' :  access_token
  }
 export const doPost = async (url , payload, token) => {
-     console.log(payload)
+     console.log('doPost',payload)
     const response = await fetch(base_url + url, {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -20,7 +20,9 @@ export const doPost = async (url , payload, token) => {
     if (response.status === 200) {
         return await response.json();
     } else {
-        throw new Error(response.statusText);
+        const error = await response.json();
+        console.log('aaaa')
+        throw error
     }
 }
 
@@ -36,7 +38,8 @@ export const doPostWithImage = async (url , payload, token) => {
     if (response.status === 200) {
         return await response.json();
     } else {
-        throw new Error(response.statusText);
+        const error = await response.json();
+        throw error
     }
 }
 
@@ -61,7 +64,8 @@ export const CameraOut = async () => {
         return response
     } else {
         console.log(response)
-        throw new Error(response);
+        const error = await response.json();
+        throw error
     }
 }
 
@@ -74,6 +78,8 @@ export const doGet = async (url , payload, token ) => {
     if (response.status === 200) {
         return await response.json();
     } else {
-        throw new Error(response.statusText);
+        const error = await response.json();
+        throw error
     }
 }
+

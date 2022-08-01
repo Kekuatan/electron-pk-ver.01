@@ -1,4 +1,3 @@
-
 <script>
     // export let name;
     // let response;
@@ -20,8 +19,11 @@
     // function handleClick(payload){
     // 	results = doPost(payload)
     // }
-    import {user,vehicles} from "./stores";
+    import {user, vehicles} from "./stores";
     import {Route} from "./routes.js";
+    import "carbon-components-svelte/css/g80.css";
+    import {Grid, Row, Column} from "carbon-components-svelte";
+    import {Tag} from "carbon-components-svelte";
 
     let params;
     let page = Route('home', $user)
@@ -39,25 +41,55 @@
 </script>
 
 
-<header>
-    <nav>
-        <a href="#" on:click={()=>{Route('home',$user)}}>Home</a>
-        <a href="#" on:click={()=>{Route('login', $user)}}>Login</a>
-        <a href="#" on:click={setUser}>set user</a>
-        <!--		<a href="/private">Secret Page</a>-->
-    </nav>
-</header>
-
+<!--<header>-->
+<!--    &lt;!&ndash;    <nav>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <a href="#" on:click={()=>{Route('home',$user)}}>Home</a>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <a href="#" on:click={()=>{Route('login', $user)}}>Login</a>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <a href="#" on:click={setUser}>set user</a>&ndash;&gt;-->
+<!--    &lt;!&ndash;        &lt;!&ndash;		<a href="/private">Secret Page</a>&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;    </nav>&ndash;&gt;-->
+<!--</header>-->
 <main>
     {#if isLoading}
-       <p>Loading....</p>
+        <p>Loading....</p>
     {:else}
         <svelte:component this={page} {...params} bind:page bind:params bind:isLoading/>
     {/if}
 
-<!--    <p>{page}</p>-->
+    <!--    <p>{page}</p>-->
 </main>
+{#if $user?.['auth']}
+    <footer>
+        <Row>
+            <Column>
+                <div class="user-data">
+                    <p>
+                        Kasir :
+                        <Tag type="outline">{($user['data']['name']).toUpperCase()}</Tag>
+                        Shift :
+                        <Tag type="outline">{($user['data']['shift']['description']).toUpperCase()}</Tag>
+                        Pos :
+                        <Tag type="outline">PK-1</Tag>
+                    </p>
+                </div>
+            </Column>
+            <Column>
 
+                    <div class="user-data">
+                        <p>
+                            Manual :
+                            <Tag type="outline">F5</Tag>
+                            Ticket Hilang :
+                            <Tag type="outline">F4</Tag>
+                            Logout
+                            <Tag type="outline">F9</Tag>
+                        </p>
+
+                </div>
+            </Column>
+        </Row>
+    </footer>
+{/if}
 <style>
     main,
     header {
@@ -69,6 +101,24 @@
         margin-right: 10px;
         text-decoration: none;
     }
+
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        letter-spacing: 3px;
+
+        background-color: #525252;
+        font-family: var(---font-cosmetic);
+        color: var(--color-cosmetic-blue);
+        text-align: center;
+    }
+
+    .user-data {
+        padding: 10px;
+    }
+
 </style>
 
 <!--<main>-->

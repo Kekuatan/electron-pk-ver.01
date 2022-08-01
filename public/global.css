@@ -1,63 +1,76 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+
+/* orbitron-latin-400-normal*/
+@font-face {
+	font-family: 'Orbitron';
+	font-style: normal;
+	font-display: swap;
+	font-weight: 400;
+	src: url('./files/orbitron-latin-400-normal.woff2') format('woff2'), url('./files/orbitron-all-400-normal.woff') format('woff');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+:root {
+	--color-cosmetic-blue: #17D4FE;
+	---font-cosmetic: Orbitron;
+
+	--color-label: #ffffff;
 }
 
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+
+.bx--text-input{
+	text-align: center;
+	background-color: transparent;
+	border-color: var(--color-cosmetic-blue);
+	font-family: var(---font-cosmetic);
+	margin-bottom: 20px;
 }
 
-a:hover {
-	text-decoration: underline;
+.bx--text-input--xl{
+	font-size: 60px;
+	height: 130px;
+	letter-spacing: 7px;
 }
 
-a:visited {
-	color: rgb(0,80,160);
+.bx--text-input:disabled {
+	letter-spacing: 3px;
+	-webkit-text-fill-color: #17D4FE;
+}
+.bx--label--disabled, .bx--form__helper-text--disabled {
+	color: var(--color-label);
 }
 
-label {
-	display: block;
+.bx--label {
+	 font-size: .75rem;
+	 font-weight: 400;
+	 line-height: 1.33333;
+	 letter-spacing: .32px;
+	 display: inline-block;
+	 margin-bottom: 0.5rem;
+	 color: var(--color-label);
+	 font-weight: 400;
+	 line-height: 1rem;
+	 vertical-align: baseline;
+ }
+
+.label-xl{
+	font-size: 20px;
+	letter-spacing: 7px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color:  var(--color-cosmetic-blue);
 }
 
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	-webkit-padding: 0.4em 0;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
+.bx--select-input {
+	text-align: center;
+	background-color: transparent;
+	border-color: var(--color-cosmetic-blue);
+	font-family: var(---font-cosmetic);
+	margin-bottom: 20px;
 
-input:disabled {
-	color: #ccc;
 }
-
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:disabled {
-	color: #999;
-}
-
-button:not(:disabled):active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
+.bx--select-input--xl {
+	font-size: 30px;
+	height: 130px;
+	letter-spacing: 7px;
+	max-height: 130px;
 }
