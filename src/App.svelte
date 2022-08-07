@@ -1,4 +1,10 @@
+
 <script>
+    // build/extra.css is fed from css files imported here
+    import "../node_modules/alertifyjs/build/css/alertify.css";
+    import "../node_modules/alertifyjs/build/css/themes/semantic.min.css";
+
+
     // export let name;
     // let response;
     // let payload;
@@ -19,7 +25,7 @@
     // function handleClick(payload){
     // 	results = doPost(payload)
     // }
-    import {user, vehicles} from "./stores";
+    import {user, modal, vehicles} from "./stores";
     import {Route} from "./routes.js";
     import "carbon-components-svelte/css/g80.css";
     import {Grid, Row, Column} from "carbon-components-svelte";
@@ -58,6 +64,7 @@
 
     <!--    <p>{page}</p>-->
 </main>
+
 {#if $user?.['auth']}
     <footer>
         <Row>

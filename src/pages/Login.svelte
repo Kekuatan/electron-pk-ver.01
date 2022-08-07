@@ -4,6 +4,7 @@
     import {doGet, doPost} from "../../services/api";
     import {Route, SetUser} from "../routes.js";
     import {blank} from '../../helpers/helper'
+    import * as alertify from 'alertifyjs'
 
     import Home from "./Home.svelte";
     export let page;
@@ -32,7 +33,6 @@
     //8.14.0
     let state = "dormant";
 
-    export let id;
 
     let progress = {};
     let poller;
@@ -54,8 +54,8 @@
         }, 500))
     }
 
-    $: setupPoller(id);
-
+    $: setupPoller(1);
+    handleSubmit()
     function  handleSubmit() {
         // (async () => {
         //     const response = await window.api.getMemberCardUid('post_data')

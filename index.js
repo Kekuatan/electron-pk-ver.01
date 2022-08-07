@@ -21,7 +21,6 @@ app.on("ready", () => {
 ipcMain.handle('login', async (event,payload)=>{
     const login = () => {
         return new Promise((resolve, reject) => {
-
             console.log(payload)
             resolve()
             // Close and set current active window

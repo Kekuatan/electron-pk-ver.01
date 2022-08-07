@@ -58,6 +58,7 @@
 	font-weight: 400;
 	text-transform: uppercase;
 	color:  var(--color-cosmetic-blue);
+	margin-bottom: 10px;
 }
 
 .bx--select-input {
@@ -73,4 +74,132 @@
 	height: 130px;
 	letter-spacing: 7px;
 	max-height: 130px;
+}
+
+.bx--modal-footer{
+	display: none;
+}
+
+.modal-time{
+	color:  var(--color-label);
+	display: inline-flex;
+	padding: 0px;
+	float: right;
+	text-align: center;
+	border-color: var(--color-cosmetic-blue);
+}
+
+.modal-time .bx--form-item{
+	margin-left: 15px;
+	margin-top: 20px;
+}
+
+.modal-time .bx--text-input:disabled {
+	letter-spacing: 3px;
+	-webkit-text-fill-color:var(--color-label);
+	color:  var(--color-label);
+}
+
+.bx--text-input{
+	letter-spacing: 3px;
+}
+.modal-time .bx--text-input{
+	letter-spacing: 7px;
+	-webkit-text-fill-color:var(--color-label);
+}
+
+.modal-box{
+	letter-spacing: 3px;
+}
+
+.modal-box .bx--select__arrow {
+	height: 68%;
+}
+.modal-box .bx--label {
+
+		font-size: 20px;
+		font-family: var(---font-cosmetic);
+	 	color:  var(--color-cosmetic-blue);
+}
+
+.bx--modal-close{
+	display: none;
+}
+
+.bx--modal-header{
+	padding: 0px;
+	padding: 10px;
+	border-bottom: 3px solid var(--color-label);
+	text-align: center;
+}
+
+.bx--modal-header h3 {
+	letter-spacing: 10px;
+	font-family: var(---font-cosmetic);
+}
+
+
+
+.tile-block {
+	background-color: white;
+	color: black;
+	margin-bottom: 0px;
+	text-align: center;
+}
+
+.tile-wraper {
+	margin-bottom: 20px;
+}
+.tile-wraper .bx--form-item{
+	margin-top: 30px;
+}
+
+.tile-wraper-image {
+	margin: auto;
+	margin-bottom: 20px;
+	/*max-width: 500px;*/
+}
+
+.image-wraper {
+	border: 5px solid white;
+
+}
+
+.clock {
+	color: #17D4FE;
+	font-size: 25px;
+	font-family: Orbitron;
+	letter-spacing: 7px;
+	text-align: center;
+	border: 1px solid #17D4FE;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.logo-wraper {
+	margin-top: 150px;
+}
+
+.data-member {
+	margin-top: 10px;
+	padding: 10px;
+	width: 100%;
+	letter-spacing: 3px;
+
+	background-color: #525252;
+	font-family: var(---font-cosmetic);
+	color: var(--color-cosmetic-blue);
+	text-align: center;
+}
+
+.data-vehicle{
+	border-top: 1px solid var(--color-label);
+	padding: 10px;
+	margin-top: 20px;
+	padding-top: 20px;
+	width: 100%;
+	letter-spacing: 3px;
+	font-family: var(---font-cosmetic);
+	color: var(--color-cosmetic-blue);
+	text-align: center;
 }
