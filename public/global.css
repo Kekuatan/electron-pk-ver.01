@@ -84,7 +84,6 @@
 	color:  var(--color-label);
 	display: inline-flex;
 	padding: 0px;
-	float: right;
 	text-align: center;
 	border-color: var(--color-cosmetic-blue);
 }
@@ -202,4 +201,8 @@
 	font-family: var(---font-cosmetic);
 	color: var(--color-cosmetic-blue);
 	text-align: center;
+}
+
+#modal-year{
+	width:120px;
 }

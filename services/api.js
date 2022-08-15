@@ -88,11 +88,17 @@ const cameraApi =  () => {
 
 const responseHandling = async (response) => {
     let body = await response.json()
-    if (response.status === 200) {
+    let exclude = [200,201,202]
+    console.log('body', body)
+    body['status_code'] = response.status
+    console.log(body)
+    if(exclude.indexOf(response.status) > -1){
         alertify.success(response.url)
         return body
     } else {
-        alertify.error(body.message)
+        if(!blank(body.message)){
+            alertify.error(body.message)
+        }
         return null
     }
 }

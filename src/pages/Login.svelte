@@ -34,27 +34,27 @@
     let state = "dormant";
 
 
-    let progress = {};
-    let poller;
-
-    const setupPoller = (id) => {
-        if (poller) {
-            clearInterval(poller);
-        }
-        poller = setInterval(doPoll(id), 2000)
-    }
-
-    const doPoll = (id) => async () => {
-        console.log(`polling ${id}`)
-        progress[id] = await new Promise(resolve => setTimeout(async () => {
-                const response = await window.api.getMemberCardUid('post_data')
-                console.log('-----dari login-------')
-                console.log(response)
-            resolve((progress[id] || 0) + 1)
-        }, 500))
-    }
-
-    $: setupPoller(1);
+    // let progress = {};
+    // let poller;
+    //
+    // const setupPoller = (id) => {
+    //     if (poller) {
+    //         clearInterval(poller);
+    //     }
+    //     poller = setInterval(doPoll(id), 2000)
+    // }
+    //
+    // const doPoll = (id) => async () => {
+    //     console.log(`polling ${id}`)
+    //     progress[id] = await new Promise(resolve => setTimeout(async () => {
+    //             const response = await window.api.getMemberCardUid('post_data')
+    //             console.log('-----dari login-------')
+    //             console.log(response)
+    //         resolve((progress[id] || 0) + 1)
+    //     }, 500))
+    // }
+    //
+    // $: setupPoller(1);
     handleSubmit()
     function  handleSubmit() {
         // (async () => {
