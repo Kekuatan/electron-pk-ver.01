@@ -41,10 +41,16 @@ contextBridge.exposeInMainWorld(
             // port.write('TRIG1#');
             return await ipcRenderer.invoke('login', payload)
                 .then((result) => {
-                console.log(payload,result)
+                console.log(result)
                 return result
             })
-
+        },
+        camera: async () => {
+            return await ipcRenderer.invoke('camera')
+                .then((result) => {
+                    console.log('preload ok')
+                    return result
+                })
         },
         openGate: async (payload) => {
             console.log(payload)
@@ -64,5 +70,34 @@ contextBridge.exposeInMainWorld(
                     return result
                 })
         },
-    }
+        getParameter: async (coloum) => {
+            return await ipcRenderer.invoke('getParameter', coloum)
+                .then((result) => {
+                    console.log(coloum, result)
+                    return result
+                })
+        },
+        get: async (url) => {
+            return await ipcRenderer.invoke('get', url)
+                .then((result) => {
+                    return result
+                })
+        },
+
+        post: async (payload) => {
+            return await ipcRenderer.invoke('post', payload)
+                .then((result) => {
+                    return result
+                })
+        },
+
+        updateParameter: async (coloum, value) => {
+            return await ipcRenderer.invoke('updateParameter', [coloum,value])
+                .then((result) => {
+                    console.log(coloum, result)
+                    return result
+                })
+        },
+    },
+
 );

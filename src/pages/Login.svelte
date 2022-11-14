@@ -1,4 +1,3 @@
-
 <script>
     import {user, vehicles} from "../stores";
     import {doGet, doPost} from "../../services/api";
@@ -7,6 +6,7 @@
     import * as alertify from 'alertifyjs'
 
     import Home from "./Home.svelte";
+
     export let page;
     export let params;
     export let isLoading;
@@ -15,9 +15,10 @@
     let password = 'admin';
     let results;
     let invalidInput = false;
-    import { TextInput } from "carbon-components-svelte";
-    import { Button, ButtonSet, InlineLoading } from "carbon-components-svelte";
-    import Login  from "carbon-icons-svelte/lib/Login.svelte";
+    import {TextInput} from "carbon-components-svelte";
+    import {Button, ButtonSet, InlineLoading} from "carbon-components-svelte";
+    import Login from "carbon-icons-svelte/lib/Login.svelte";
+
     const descriptionMap = {
         active: "Submitting...",
         finished: "Success",
@@ -55,51 +56,46 @@
     // }
     //
     // $: setupPoller(1);
-    handleSubmit()
-    function  handleSubmit() {
-        // (async () => {
-        //     const response = await window.api.getMemberCardUid('post_data')
-        //     console.log('-----dari login-------')
-        //     console.log(response)
-        //     console.log('--------------------')
-        // })();
+    const responseHandling = async (response, message = '') => {
+        let exclude = [200, 201, 202]
+        console.log('body', response)
+        if (exclude.indexOf(response.status_code) > -1) {
+            // alertify.success(response.url)
+            alertify.success(message)
+            return response.data
+        } else {
+            if (!blank(response)) {
+                alertify.error(response.message)
+            }
+            return null
+        }
+    }
 
+
+    async function handleSubmit() {
         state = 'active';
-        results = doGet('/api/vehicles')
-
-            .then(function (response) {
-                console.log(response)
-                $vehicles = response;
-                console.log($vehicles)
-            })
-
-        results = doPost('/api/login',{
+        let login = await window.api.login({
             'email': username,
             'password': password
         })
-            .then(function (response) {
-                console.log(response, SetUser('home',response))
-                response['auth'] = true
-                $user = SetUser('home',response)
-                params =  user
-                page = Route('home',$user)
-                state = 'finished';
-            }).catch((e)=>{
-                state = 'finished';
-                results = e
-                state = 'dormant';
-                console.log(!blank(results) && !blank(results?.['errors']?.['password']))
-        })
+
+        let vehiclesData = await window.api.get('/api/vehicles')
+        login = await responseHandling(login, 'login')
+        vehiclesData = await responseHandling(vehiclesData, 'vehicles')
+
+        if (!blank(login)) {
+            login['auth'] = true
+            $user = SetUser('home', login)
+            $vehicles = vehiclesData
+            params = login
+            page = Route('home', $user)
+            state = 'finished';
+        } else {
+            state = 'finished';
+            state = 'dormant';
+        }
     }
 
-    (async () => {
-        const response = await window.api.login('post_data')
-        console.log('-----dari login-------')
-        console.log(response)
-        console.log('--------------------')
-    })();
-
-    // handleSubmit()
 
 </script>
 
@@ -114,30 +110,30 @@
                 bind:value={username}
                 type="text"
                 name="username"
-                invalid = {!blank(results) && !blank(results?.['errors']?.['email'])}
+                invalid={!blank(results) && !blank(results?.['errors']?.['email'])}
                 invalidText={results?.['errors']?.['email']?.[0]}
                 labelText="USERNAME"
                 placeholder="Enter user name..."
         />
 
-        <br />
+        <br/>
         <TextInput
                 bind:value={password}
                 type="password"
                 name="password"
-                invalid = {!blank(results) && !blank(results?.['errors']?.['password'])}
+                invalid={!blank(results) && !blank(results?.['errors']?.['password'])}
                 invalidText={results?.['errors']?.['password']?.[0]}
                 labelText="PASSWORD"
                 placeholder="Enter user name..."
         />
         <div class="submit-btn">
             <ButtonSet>
-            {#if state !== "dormant"}
-                <InlineLoading status={state} description={descriptionMap[state]} />
-            {:else}
-                <Button  type="submit"  icon={Login} >Submit</Button>
-            {/if}
-                </ButtonSet>
+                {#if state !== "dormant"}
+                    <InlineLoading status={state} description={descriptionMap[state]}/>
+                {:else}
+                    <Button type="submit" icon={Login}>Submit</Button>
+                {/if}
+            </ButtonSet>
         </div>
 
     </form>
@@ -146,11 +142,12 @@
 
 <style>
 
-    h1{
+    h1 {
         margin-bottom: 20px;
         text-align: left;
     }
-    .login-form{
+
+    .login-form {
         padding: 20px;
         position: absolute;
         top: 50%;
@@ -160,8 +157,8 @@
         /*background-color: green;*/
     }
 
-    .submit-btn{
-     text-align: end;
+    .submit-btn {
+        text-align: end;
         /*text-align: center;*/
         margin: 20px 0px;
         /*position: absolute;*/

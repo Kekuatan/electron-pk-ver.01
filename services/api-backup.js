@@ -31,32 +31,10 @@ export const doPostWithFormData = async (url, payload, token) => {
      return postWithFormData(url, payload, token)
 }
 
-async function imageDataToBlob(base64ImageData){
-    const contentType = 'image/png';
-
-    const byteCharacters = atob(base64ImageData.substr(`data:${contentType};base64,`.length));
-    const byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
-        const slice = byteCharacters.slice(offset, offset + 1024);
-
-        const byteNumbers = new Array(slice.length);
-        for (let i = 0; i < slice.length; i++) {
-            byteNumbers[i] = slice.charCodeAt(i);
-        }
-
-        const byteArray = new Uint8Array(byteNumbers);
-
-        byteArrays.push(byteArray);
-    }
-    return new Blob(byteArrays, {type: contentType})
-}
-
 export const Camera =  async (imageName) => {
     console.log('camera runing')
     let result = null;
-    // const cam = cameraApi()
-    let cam =  window.api.camera()
+    const cam = cameraApi()
     const camera = () => {
         return new Promise((resolve, reject) => {
             cam
@@ -79,14 +57,8 @@ export const Camera =  async (imageName) => {
             })
         })
     }
+
     await camera()
-
-
-    // let blob =  imageDataToBlob(cameraData)
-    // result = new File(blob, imageName + ".jpeg", {
-    //     type: 'image/jpeg'
-    // })
-
     return result
 }
 

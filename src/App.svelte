@@ -30,6 +30,7 @@
     import "carbon-components-svelte/css/g80.css";
     import {Grid, Row, Column} from "carbon-components-svelte";
     import {Tag} from "carbon-components-svelte";
+    import {blank} from "../helpers/helper";
 
     let params;
     let page = Route('home', $user)
@@ -74,7 +75,7 @@
                         Kasir :
                         <Tag type="outline">{($user['data']['name']).toUpperCase()}</Tag>
                         Shift :
-                        <Tag type="outline">{($user['data']['shift']['description']).toUpperCase()}</Tag>
+                        <Tag type="outline">{(blank($user['data']['shift']) ? '' : $user['data']['shift']['description']).toUpperCase()}</Tag>
                         Pos :
                         <Tag type="outline">PK-1</Tag>
                     </p>

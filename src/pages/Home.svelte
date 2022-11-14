@@ -266,14 +266,16 @@
         console.log('aaaaaa', index)
         if (index === 3) {
             clearInterval(poller);
-            input['picture_vehicle_out'] = await Camera(input['barcode_no'])
-            results = await doPostWithFormData('/api/ticket/find-barcode', input, $user['access_token'])
+            // input['picture_vehicle_out'] = await Camera(input['barcode_no'])
+            // results = await doPostWithFormData('/api/ticket/find-barcode', input, $user['access_token'])
+            let resultPost = await window.api.post({'data':input,'url':'/api/ticket/find-barcode'})
+            results  = resultPost.data
             state = 'finished';
-            console.log('results', results)
-            if (results?.['status_code'] === 200) {
+            console.log('results', results,resultPost)
+            if (resultPost['status_code'] === 200) {
                 state = 'dormant';
                 indexForm = index;
-            } else if (results?.['status_code'] === 201) {
+            } else if (resultPost['status_code'] === 201) {
                 state = 'dormant';
                 vehicleName = getVehicleName(results?.['vehicle']?.['id']).toUpperCase()
                 indexForm = 4;
@@ -281,13 +283,15 @@
                 state = 'dormant';
             }
         } else if (index === 4) {
-            input['picture_vehicle_out'] = await Camera(input['barcode_no'])
+            // input['picture_vehicle_out'] = await Camera(input['barcode_no'])
 
-            results = await doPostWithFormData('/api/ticket/out', input, $user['access_token'])
+            // results = await doPostWithFormData('/api/ticket/out', input, $user['access_token'])
+            let resultPost = await window.api.post({'data':input,'url':'/api/ticket/out'})
+            results  = resultPost.data
             state = 'finished';
             if (!blank(results)) {
                 state = 'dormant';
-                indexForm = index;
+                // indexForm = index;
             } else {
                 state = 'dormant';
             }
